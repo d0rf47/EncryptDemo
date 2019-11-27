@@ -14,19 +14,17 @@ const mainRouter    = require('./Routes/General');
 const userRouter    = require('./Routes/User');
 const taskRouter    = require('./Routes/Task');
 
-app.unsubscribe(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
+app.use(session({secret:"key"}))
 app.use(fileup());
 app.use(methodOverride('_method'));
-// app.use((req,res,next)=>
-// {
-//     if(req.session.userData)
-//     {
-//     res.locals.user =  req.session.userData;
-//     next();
-//     }
-// })
+ app.use((req,res,next)=>
+{
+    res.locals.user =  req.session.userData;
+    next();
+ })
 app.use('/', mainRouter);
 app.use('/User', userRouter);
 app.use('/Task', taskRouter);
