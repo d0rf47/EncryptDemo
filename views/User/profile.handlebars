@@ -1,0 +1,14 @@
+<div class="container" id='pageWrapper'>
+    <H1> Welcome to you profile Page </H1>
+    {{#if user}}
+    <div class="container" id='profile'>
+        <div>
+            Welcome {{this.email}} to you dashboard
+        </div>
+        <div>
+            <img src="/uploads/{{this.proPic}}">
+        </div>
+
+    </div>
+    {{/if}}
+</div>    

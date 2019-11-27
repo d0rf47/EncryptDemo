@@ -1,0 +1,25 @@
+<div class="container" id="pageWrapper">
+    {{#if errors}}
+    {{errors}}
+    {{/if}}
+    <h1>Create An Account</h1>
+        <div>
+            <form method="post" action="/User/register" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="newUsername"> Enter Email </label>
+                    <input type="email" class="form-control" id="newUsername" name="newUsername" placeholder="enter email">                    
+                </div>
+                <div class="form-group">
+                    <label for="newUserPass"> Enter Password </label>
+                    <input type="password" class="form-control" id="newUserPass" name="newUserPass" placeholder="enter email">                    
+                </div>
+                <div class="form-group">
+                    <label for="proPic">Please upload a profile picture</label>
+                    <input type="file" class="form-control" id="proPic" name="proPic">
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+
+
+</div>

@@ -7,23 +7,26 @@ const mongoose      = require('mongoose');
 const session       = require('express-session');
 const fileup        = require('express-fileupload');
 require("dotenv").config({path:'./config/Keys.env'});
-const dbUrl         = `mongodb+srv://${process.env.mbd}:${process.env.mbdToken}@cluster0-ponsl.azure.mongodb.net/test?retryWrites=true&w=majority`;
+const dbUrl         = `mongodb+srv://${process.env.mdb}:${process.env.mbdToken}@cluster0-ponsl.azure.mongodb.net/TaskMgr?retryWrites=true&w=majority`;
 const methodOverride= require('method-override');
 const port          = process.env.port || 4000;
 const mainRouter    = require('./Routes/General');
-const userRouter    = require('./Routes/Users');
-const taskRouter    = require('./Routes/Tasks');
+const userRouter    = require('./Routes/User');
+const taskRouter    = require('./Routes/Task');
 
 app.unsubscribe(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
 app.use(fileup());
 app.use(methodOverride('_method'));
-app.use((req,res,next)=>
-{
-    res.locals.user =  req.session.userData;
-    next();
-})
+// app.use((req,res,next)=>
+// {
+//     if(req.session.userData)
+//     {
+//     res.locals.user =  req.session.userData;
+//     next();
+//     }
+// })
 app.use('/', mainRouter);
 app.use('/User', userRouter);
 app.use('/Task', taskRouter);
