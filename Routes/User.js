@@ -42,6 +42,10 @@ router.post('/register', (req,res)=>
             password:   req.body.newUserPass
         }
         const newU = new User(newUser);
+    
+    if(req.body.proPic != null)
+    {
+     
        
         newU.save()
             .then(newU=>
@@ -63,9 +67,22 @@ router.post('/register', (req,res)=>
                         });
                 })
                 .catch(err=>console.log(`err: ${err}`));
-        }
-
+    }
     
+        else
+        {
+            newU.save()
+                .then(()=>
+                {
+                    console.log(`User Added no Pic Added`);        
+                    res.redirect('/User/profile')        
+                })
+                .catch((err)=>
+                {
+                    console.log(`User Add Fail : ${err}`);
+                })
+        };
+    }
 })
 
 
@@ -116,6 +133,13 @@ router.post('/login',(req,res)=>
                 }
             })
         .catch(err=> console.log(`err : ${err}`));
+})
+
+
+router.get('/logout',(req,res)=>
+{
+    req.session.destroy();
+    res.redirect('/');
 })
 
 module.exports = router;

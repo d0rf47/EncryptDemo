@@ -21,7 +21,7 @@ const newUserSchema = new Schema
     proPic:
     {
         type:String,
-        default: './uploads/DSC_0944.JPG'
+        default: 'DSC_0944.JPG'
     },
     timeStamp:
     {
